@@ -36,3 +36,35 @@
     transform: rotate(360deg);
   }
 }
+.App-container{
+  margin: 20px;
+}
+.sortIcon {
+  opacity: 0.5;
+  margin-left: 3px;
+  height: 12px;
+}
+.pinStyle{
+  background-color:	#006400;
+  color: #006400;
+}
+.up-text{
+  font-size: 12px;
+  float: "right";
+  text-align: "left";
+  margin-top: 2px !important;
+}
+.down-text{
+  font-size: 12px;
+  float: "right";
+  text-align: "left";
+  margin-top: 2px !important;
+}
+.up-play-icon{
+  font-size: 12px !important;
+  transform: rotate(90deg) !important;
+}
+.down-play-icon{
+  font-size: 12px !important;
+  transform: rotate(-90deg)!important;
+}
