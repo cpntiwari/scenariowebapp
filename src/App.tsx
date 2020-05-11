@@ -1,12 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { ScenarioManager } from './components/ScenarioManager';
+import React, { Fragment } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import "./App.css";
+import { ScenarioManager } from "./components/ScenarioManager";
+import ScenarioDetails from "./components/UnderConstruction";
 
 function App() {
   return (
     <div className="App-container">
-      <ScenarioManager></ScenarioManager>
+      <Router>
+        <Route path="/" exact component={ScenarioManager} />
+
+        <Route path="/scenarioDetails" component={ScenarioDetails} />
+      </Router>
     </div>
   );
 }
