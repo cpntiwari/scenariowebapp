@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function OutlinedButtons() {
     const classes = useStyles();
-
     return (
         <div className={classes.root}>
             <Button variant="outlined" color="primary" href="#outlined-buttons">

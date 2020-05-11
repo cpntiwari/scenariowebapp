@@ -1,9 +1,10 @@
-import MaterialTable, { Column } from 'material-table';
+import MaterialTable from 'material-table';
 import React, { useState, useEffect } from 'react';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import OutlinedButtons from './MoreButton';
 import { RenderColumn, CreateColumn, tableIcons } from './ScenarioUtil';
-import { ScenarioAdditionalCols } from '../../common/types';
+import { ScenarioAdditionalCols, EmptyProps } from '../../common/types';
+import { Config } from '../../common/config';
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -30,8 +31,8 @@ const scenarioColumns = [
             width: "175px",
         },
         headerStyle: { textAlign: 'left' },
-        customSort: (a: { scenario: any; }, b: { scenario: any; }) => a.scenario.value.length - b.scenario.value.length,
-        render: (rowData: any) => (
+        customSort: (a: { scenario: { value: string | any[]; }; }, b: { scenario: { value: string | any[]; }; }) => a.scenario.value.length - b.scenario.value.length,
+        render: (rowData: { [x: string]: { diff: any; }; }) => (
             <RenderColumn rowData={rowData} field='scenario' positive={rowData['scenario'].diff}></RenderColumn>
         )
     },
@@ -39,7 +40,7 @@ const scenarioColumns = [
         title: 'SCORE', field: 'score', type: 'string',
         width: "100px",
         headerStyle: { textAlign: 'left' },
-        customSort: (a: { score: any; }, b: { score: any; }) => a.score.value - b.score.value,
+        customSort: (a: { score: { value: number; }; }, b: { score: { value: number; }; }) => a.score.value - b.score.value,
         cellStyle: {
             backgroundColor: "#e1f5f8",
             color: "#000",
@@ -47,13 +48,13 @@ const scenarioColumns = [
             textAlign: "right",
             borderRight: "1px solid #000",
             width: "100px",
-        }, render: (rowData: any) => (
+        }, render: (rowData: { [x: string]: { diff: any; }; }) => (
             <RenderColumn rowData={rowData} field='score' positive={rowData['score'].diff} ></RenderColumn>
         ),
     }
 ]
 
-export const SortableTable: React.FC<{}> = () => {
+export const SortableTable: React.FC<EmptyProps> = () => {
     const classes = useStyles();
     const [result, setResult] = useState({ status: "loading", records: [] });
     const [columns, setColumns] = useState<any[]>(scenarioColumns);
@@ -62,7 +63,7 @@ export const SortableTable: React.FC<{}> = () => {
 
     useEffect(() => {
 
-        fetch('http://localhost:4000/scenarios').then(response => response.json())
+        fetch(Config.API_BASE_URL + Config.BASE_METHOD).then(response => response.json())
             .then(response => {
                 if (response.statusCode === 401 || response.statusCode === 403) {
                     setResult({ status: "error", records: [] })
