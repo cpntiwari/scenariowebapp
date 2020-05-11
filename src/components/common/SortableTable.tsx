@@ -105,11 +105,15 @@ export const SortableTable: React.FC<EmptyProps> = () => {
                         })
                     }}
                 />
-                <section className={classes.rightToolbar}>
-                    <NavLink to="/scenarioDetails">
-                        <OutlinedButtons></OutlinedButtons>
-                    </NavLink>
-                </section>
+                {
+                    result && result.records && result.records.length > 0 && (
+                        <section className={classes.rightToolbar}>
+                            <NavLink to="/scenarioDetails">
+                                <OutlinedButtons></OutlinedButtons>
+                            </NavLink>
+                        </section>
+                    )
+                }
             </div>
         </>
     );
