@@ -40,8 +40,8 @@
   margin: 20px;
 }
 .sortIcon {
-  opacity: 0.5;
-  margin-left: 3px;
+  opacity: 0.3;
+  margin-left: 1px;
   height: 12px;
 }
 .pinStyle{
@@ -49,22 +49,30 @@
   color: #006400;
 }
 .up-text{
-  font-size: 12px;
+  font-size: 11px;
   float: "right";
   text-align: "left";
-  margin-top: 2px !important;
+  margin-top: 3px !important;
 }
 .down-text{
-  font-size: 12px;
+  font-size: 11px;
   float: "right";
   text-align: "left";
-  margin-top: 2px !important;
+  margin-top: 1px !important;
 }
 .up-play-icon{
-  font-size: 12px !important;
+  font-size: 15px !important;
   transform: rotate(90deg) !important;
+  vertical-align: text-bottom;
 }
 .down-play-icon{
-  font-size: 12px !important;
+  font-size: 15px !important;
   transform: rotate(-90deg)!important;
+  vertical-align: text-top;
+}
+.table-header{
+  color:"#A19F9F"
+}
+.cell-header{
+  color:"#A19F9F"
 }

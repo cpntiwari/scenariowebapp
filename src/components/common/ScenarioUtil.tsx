@@ -54,15 +54,15 @@ export const RenderColumn = (props: any) => {
                         </Grid></Grid>)
                     :
                     (<>
-                        {props.positive === 1 ? (<><Grid item xs={6}>
+                        {props.positive === 1 ? (<><Grid item xs={4}>
                             ${props.rowData[props.field].value}
-                        </Grid><Grid item xs={6} style={{ color: "#008000" }} className="up-text">
+                        </Grid><span style={{ color: "#008000" }} className="up-text">
                                 {props.rowData[props.field].variance}%
-                            <PlayArrowIcon className="down-play-icon"></PlayArrowIcon> </Grid></>) :
-                            props.positive === 2 ? (<><Grid item xs={6}>
+                            <PlayArrowIcon className="down-play-icon"></PlayArrowIcon> </span></>) :
+                            props.positive === 2 ? (<><Grid item xs={4}>
                                 ${props.rowData[props.field].value}
-                            </Grid><Grid style={{ color: "#a32127" }} className="down-text">{props.rowData[props.field].variance}%
-                                <PlayArrowIcon className="up-play-icon"></PlayArrowIcon> </Grid></>)
+                            </Grid><span style={{ color: "#a32127" }} className="down-text">{props.rowData[props.field].variance}%
+                                <PlayArrowIcon className="up-play-icon"></PlayArrowIcon> </span></>)
                                 : (<Grid item xs={12}>{props.rowData[props.field].value}</Grid>)
 
                         }
@@ -76,11 +76,11 @@ export const CreateColumn = (customTitle: string, customField: string, customTyp
     title: customTitle,
     field: customField,
     type: customType,
-    width: "175px",
-    headerStyle: { textAlign: customHeaderAlign },
+    width: "160px",
+    headerStyle: { textAlign: customHeaderAlign, color: "#A19F9F" },
     customSort: (a: { [x: string]: { value: number; }; }, b: { [x: string]: { value: number; }; }, field: string | number) => { return a[customField].value - b[customField].value },
     cellStyle: {
-        color: "#000",
+        color: "#5C5656",
         textAlign: customCellAlign
     },
     render: (rowData: any) => (

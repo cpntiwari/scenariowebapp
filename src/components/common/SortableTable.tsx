@@ -25,14 +25,13 @@ const scenarioColumns = [
         title: 'SCENARIO',
         field: 'scenario',
         type: 'string',
-        width: "175px",
-        defaultSort: "asc",
+        width: "160px",
         cellStyle: {
-            color: "#000",
+            color: "#5C5656",
             textAlign: "left",
-            width: "175px",
+            width: "160px",
         },
-        headerStyle: { textAlign: 'left' },
+        headerStyle: { textAlign: 'left', color:"#A19F9F" },
         customSort: (a: { scenario: { value: string | any[]; }; }, b: { scenario: { value: string | any[]; }; }) => a.scenario.value.length - b.scenario.value.length,
         render: (rowData: { [x: string]: { diff: any; }; }) => (
             <RenderColumn rowData={rowData} field='scenario' positive={rowData['scenario'].diff}></RenderColumn>
@@ -40,16 +39,16 @@ const scenarioColumns = [
     },
     {
         title: 'SCORE', field: 'score', type: 'string',
-        width: "100px",
-        headerStyle: { textAlign: 'left' },
+        width: "85px",
+        headerStyle: { textAlign: 'left',color:"#A19F9F" },
         customSort: (a: { score: { value: number; }; }, b: { score: { value: number; }; }) => a.score.value - b.score.value,
         cellStyle: {
             backgroundColor: "#e1f5f8",
-            color: "#000",
+            color: "#5C5656",
             fontWeight: "bold",
             textAlign: "right",
-            borderRight: "1px solid #000",
-            width: "100px",
+            borderRight: "2px solid #000",
+            width: "85px",
         }, render: (rowData: { [x: string]: { diff: any; }; }) => (
             <RenderColumn rowData={rowData} field='score' positive={rowData['score'].diff} ></RenderColumn>
         ),
