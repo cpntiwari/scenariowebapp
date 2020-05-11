@@ -78,7 +78,7 @@ export const CreateColumn = (customTitle: string, customField: string, customTyp
     type: customType,
     width: "175px",
     headerStyle: { textAlign: customHeaderAlign },
-    customSort: (a: { [x: string]: { value: number; }; }, b: { [x: string]: { value: number; }; }, field: string | number) => { console.log("a[customField]", customField); return a[customField].value - b[customField].value },
+    customSort: (a: { [x: string]: { value: number; }; }, b: { [x: string]: { value: number; }; }, field: string | number) => { return a[customField].value - b[customField].value },
     cellStyle: {
         color: "#000",
         textAlign: customCellAlign
