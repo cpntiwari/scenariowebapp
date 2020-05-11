@@ -6,13 +6,13 @@ import {
   makeStyles,
   Theme,
   createStyles,
-  Button,
   createMuiTheme,
   MuiThemeProvider,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import React from "react";
 import { SortableTable } from "./common/SortableTable";
+import { EmptyProps } from "../common/types";
 
 const theme = createMuiTheme({
   overrides: {
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-export const ScenarioManager: React.SFC<{}> = () => {
+export const ScenarioManager: React.SFC<EmptyProps> = () => {
   const classes = useStyles();
   return (
     <ExpansionPanel

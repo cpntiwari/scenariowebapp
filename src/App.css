@@ -36,7 +36,7 @@
     transform: rotate(360deg);
   }
 }
-.App-container{
+.App-container {
   margin: 20px;
 }
 .sortIcon {
@@ -44,27 +44,27 @@
   margin-left: 3px;
   height: 12px;
 }
-.pinStyle{
-  background-color:	#006400;
+.pinStyle {
+  background-color: #006400;
   color: #006400;
 }
-.up-text{
+.up-text {
   font-size: 12px;
   float: "right";
   text-align: "left";
   margin-top: 2px !important;
 }
-.down-text{
+.down-text {
   font-size: 12px;
   float: "right";
   text-align: "left";
   margin-top: 2px !important;
 }
-.up-play-icon{
+.up-play-icon {
   font-size: 12px !important;
   transform: rotate(90deg) !important;
 }
-.down-play-icon{
+.down-play-icon {
   font-size: 12px !important;
-  transform: rotate(-90deg)!important;
+  transform: rotate(-90deg) !important;
 }

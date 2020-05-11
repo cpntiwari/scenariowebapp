@@ -10,3 +10,7 @@ export const ScenarioAdditionalCols = [
     { "name": "Dynamic Col4", "field": "dynamicol4", "type": "string", "headerAlign": "left", "cellAlign": "left", "diff": 2 },
     { "name": "Dynamic Col5", "field": "dynamicol5", "type": "string", "headerAlign": "left", "cellAlign": "left", "diff": 2 },
 ]
+
+export interface EmptyProps{
+
+}

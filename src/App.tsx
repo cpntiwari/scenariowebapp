@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React from "react";
 import "./App.css";
 import { ScenarioManager } from "./components/ScenarioManager";
 import ScenarioDetails from "./components/UnderConstruction";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
   return (
