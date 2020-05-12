@@ -1,12 +1,11 @@
 import MaterialTable from "material-table";
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import OutlinedButtons from "./MoreButton";
 import { RenderColumn, CreateColumn, tableIcons } from "./ScenarioUtil";
 import { ScenarioAdditionalCols, EmptyProps } from "../../common/types";
 import { Config } from "../../common/config";
-import { Link } from "react-router-dom";
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -27,6 +26,7 @@ const scenarioColumns = [
     field: "scenario",
     type: "string",
     width: "175px",
+    defaultSort: "asc",
     cellStyle: {
       color: "#000",
       textAlign: "left",
@@ -45,6 +45,7 @@ const scenarioColumns = [
       ></RenderColumn>
     ),
   },
+
   {
     title: "SCORE",
     field: "score",
@@ -61,7 +62,6 @@ const scenarioColumns = [
       fontWeight: "bold",
       textAlign: "right",
       borderRight: "1px solid #000",
-      width: "100px",
     },
     render: (rowData: { [x: string]: { diff: any } }) => (
       <RenderColumn
@@ -78,7 +78,24 @@ export const SortableTable: React.FC<EmptyProps> = () => {
   const [result, setResult] = useState({ status: "loading", records: [] });
   const [columns, setColumns] = useState<any[]>(scenarioColumns);
   const [selectedRow, setSelectedRow] = useState<any>();
-  const [icons, setIcons] = useState<any>(tableIcons);
+  const [icons] = useState<any>(tableIcons);
+
+  useEffect(() => {
+    let baseColumns = columns;
+    ScenarioAdditionalCols.map((item) => {
+      return baseColumns.push(
+        CreateColumn(
+          item.name,
+          item.field,
+          item.type,
+          item.headerAlign,
+          item.cellAlign,
+          item.diff
+        )
+      );
+    });
+    setColumns(baseColumns);
+  }, []);
 
   useEffect(() => {
     fetch(Config.API_BASE_URL + Config.BASE_METHOD)
@@ -87,24 +104,12 @@ export const SortableTable: React.FC<EmptyProps> = () => {
         if (response.statusCode === 401 || response.statusCode === 403) {
           setResult({ status: "error", records: [] });
         } else {
-          ScenarioAdditionalCols.map((item) => {
-            columns.push(
-              CreateColumn(
-                item.name,
-                item.field,
-                item.type,
-                item.headerAlign,
-                item.cellAlign,
-                item.diff
-              )
-            );
-          });
-          setColumns(columns);
           setResult({ status: "loaded", records: response });
         }
       })
       .catch((error) => setResult({ status: "error", records: [] }));
   }, []);
+
   return (
     <>
       <div className={classes.root} style={{ width: "100%" }}>
@@ -131,11 +136,13 @@ export const SortableTable: React.FC<EmptyProps> = () => {
             }),
           }}
         />
-        <section className={classes.rightToolbar}>
-          <Link style={{ textDecoration: "none" }} to="/scenarioDetails">
-            <OutlinedButtons></OutlinedButtons>
-          </Link>
-        </section>
+        {result && result.records && result.records.length > 0 && (
+          <section className={classes.rightToolbar}>
+            <NavLink to="/scenarioDetails">
+              <OutlinedButtons></OutlinedButtons>
+            </NavLink>
+          </section>
+        )}
       </div>
     </>
   );

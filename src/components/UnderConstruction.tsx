@@ -2,13 +2,12 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexDirection: "column",
-    // background: "linear-gradient(-45deg,#ac32e4,#7918f2,#4801ff)",
     textAlign: "center",
   },
   main: {
@@ -19,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ScenarioDetails() {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <Container component="main" className={classes.main} maxWidth="sm">
@@ -30,9 +28,9 @@ export default function ScenarioDetails() {
           Our page is under contruction.
         </Typography>
         <Typography variant="body1">
-          <Link style={{ textDecoration: "none" }} to="/scenarioDetails">
+          <NavLink style={{ textDecoration: "none" }} to="/">
             Go to the Scenario Manager
-          </Link>
+          </NavLink>
         </Typography>
       </Container>
     </div>
