@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`More Button Component Rendering should test More Button component 1`] = `
+<div
+  className="makeStyles-root-1"
+>
+  <button
+    color="primary"
+    type="button"
+  >
+    More Details
+  </button>
+</div>
+`;
