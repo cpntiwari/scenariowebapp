@@ -24,7 +24,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -45,7 +45,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -123,7 +123,9 @@
 <a name='L65'></a><a href='#L65'>65</a>
 <a name='L66'></a><a href='#L66'>66</a>
 <a name='L67'></a><a href='#L67'>67</a>
-<a name='L68'></a><a href='#L68'>68</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -138,6 +140,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -156,22 +159,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -205,12 +209,15 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import React from "react";
 import { SortableTable } from "./common/SortableTable";
 import { EmptyProps } from "../common/types";
+import { Palette } from "../themes/Palette";
 &nbsp;
 const theme = createMuiTheme({
   overrides: {
     MuiTableHead: {
       root: {
-        borderTop: "1px solid #f2f2f2",
+        borderTopWidth: "1px",
+        borderTopColor: "#DCDCDC",
+        borderTopStyle: "solid"
       },
     },
     MuiPaper: {
@@ -226,20 +233,20 @@ const theme = createMuiTheme({
 const useStyles = makeStyles((theme: Theme) =&gt;
   createStyles({
     heading: {
-      fontSize: theme.typography.pxToRem(15),
+      fontSize: theme.typography.pxToRem(20),
       fontWeight: theme.typography.fontWeightBold,
-    },
-    expanded: {
-      margin: "0 auto",
-    },
+      color: Palette.colors.grey["700"],
+    }
   })
 );
-export const ScenarioManager: React.SFC&lt;EmptyProps&gt; = () =&gt; {
+interface DataType {
+  data: Array&lt;any&gt;,
+}
+export const ScenarioManager = () =&gt; {
   const classes = useStyles();
   return (
     &lt;ExpansionPanel
       defaultExpanded={true}
-      classes={{ expanded: classes.expanded }}
     &gt;
       &lt;ExpansionPanelSummary
         expandIcon={&lt;ExpandMoreIcon /&gt;}
@@ -250,7 +257,6 @@ export const ScenarioManager: React.SFC&lt;EmptyProps&gt; = () =&gt; {
       &lt;/ExpansionPanelSummary&gt;
       &lt;ExpansionPanelDetails&gt;
         &lt;MuiThemeProvider theme={theme}&gt;
-          {" "}
           &lt;SortableTable&gt;&lt;/SortableTable&gt;
         &lt;/MuiThemeProvider&gt;
       &lt;/ExpansionPanelDetails&gt;
@@ -264,7 +270,7 @@ export const ScenarioManager: React.SFC&lt;EmptyProps&gt; = () =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri May 15 2020 14:08:30 GMT+0530 (India Standard Time)
+                at Wed May 20 2020 21:16:35 GMT+0530 (India Standard Time)
             </div>
         </div>
         <script src="..\..\prettify.js"></script>

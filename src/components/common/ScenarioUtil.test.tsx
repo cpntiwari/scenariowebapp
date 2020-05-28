@@ -2,7 +2,7 @@ import AddBox from "@material-ui/icons/AddBox";
 import Check from "@material-ui/icons/Check";
 import { shallow } from "enzyme";
 import React, { forwardRef } from "react";
-import { RenderColumn } from "../components/common/ScenarioUtil";
+import { RenderColumn } from "./ScenarioUtil";
 let wrapper: any;
 // const props: any = { root: "root" };
 // const ref:any = {test: "test"}

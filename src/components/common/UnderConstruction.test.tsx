@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import UnderConstruction from "../components/UnderConstruction";
+import UnderConstruction from "../UnderConstruction";
 import { shallow } from "enzyme";
 let wrapper: any;
 

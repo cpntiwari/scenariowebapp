@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Under Construction Component Rendering should test Under construction component 1`] = `
+<div
+  className="makeStyles-root-1"
+>
+  <WithStyles(ForwardRef(Container))
+    className="makeStyles-main-3"
+    component="main"
+    maxWidth="sm"
+  >
+    <WithStyles(ForwardRef(Typography))
+      component="h1"
+      gutterBottom={true}
+      variant="h2"
+    >
+      Coming Soon
+    </WithStyles(ForwardRef(Typography))>
+    <WithStyles(ForwardRef(Typography))
+      component="h2"
+      gutterBottom={true}
+      variant="h5"
+    >
+      Our page is in under contruction.
+    </WithStyles(ForwardRef(Typography))>
+    <WithStyles(ForwardRef(Typography))
+      variant="body1"
+    >
+      <NavLink
+        className="makeStyles-button-2"
+        to="/"
+      >
+        <WithStyles(ForwardRef(Button))
+          color="primary"
+          variant="outlined"
+        >
+           Go back to Scenario Manager
+        </WithStyles(ForwardRef(Button))>
+      </NavLink>
+    </WithStyles(ForwardRef(Typography))>
+  </WithStyles(ForwardRef(Container))>
+</div>
+`;

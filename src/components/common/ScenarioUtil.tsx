@@ -124,3 +124,54 @@ export const CreateColumn = (
     ></RenderColumn>
   ),
 });
+export const scenarioColumns = [
+  {
+    title: "SCENARIO",
+    field: "scenario",
+    type: "string",
+    width: "160px",
+    cellStyle: {
+      color: "#5C5656",
+      textAlign: "left",
+      width: "160px",
+    },
+    headerStyle: { textAlign: "left", color: "#A19F9F" },
+    customSort: (
+      a: { scenario: { value: string | any[] } },
+      b: { scenario: { value: string | any[] } }
+    ) => a.scenario.value.length - b.scenario.value.length,
+    render: (rowData: { [x: string]: { diff: any } }) => (
+      <RenderColumn
+        rowData={rowData}
+        field="scenario"
+        positive={rowData["scenario"].diff}
+      ></RenderColumn>
+    ),
+  },
+  {
+    title: "SCORE",
+    field: "score",
+    type: "string",
+    width: "90px",
+    headerStyle: { width: "90px", textAlign: "left", color: "#A19F9F" },
+    customSort: (
+      a: { score: { value: number } },
+      b: { score: { value: number } }
+    ) => a.score.value - b.score.value,
+    cellStyle: {
+      backgroundColor: "#e1f5f8",
+      color: "#5C5656",
+      fontWeight: "bold",
+      textAlign: "right",
+      borderRight: "2px solid #000",
+      width: "90px",
+    },
+    render: (rowData: { [x: string]: { diff: any } }) => (
+      <RenderColumn
+        rowData={rowData}
+        field="score"
+        positive={rowData["score"].diff}
+      ></RenderColumn>
+    ),
+  },
+]

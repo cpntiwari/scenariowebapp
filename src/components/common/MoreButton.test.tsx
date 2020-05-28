@@ -1,5 +1,5 @@
 import React from "react";
-import MoreButton from "../components/common/MoreButton";
+import MoreButton from "./MoreButton";
 import { shallow } from "enzyme";
 let wrapper: any;
 

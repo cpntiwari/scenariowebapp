@@ -1,83 +1,42 @@
 import MaterialTable from "material-table";
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import OutlinedButtons from "./MoreButton";
-import { RenderColumn, CreateColumn, tableIcons } from "./ScenarioUtil";
+import { CreateColumn, tableIcons, scenarioColumns } from "./ScenarioUtil";
 import { ScenarioAdditionalCols, EmptyProps } from "../../common/types";
 import { Config } from "../../common/config";
+import { Spinner } from "./Spinner";
+import { ErrorDetails } from "./ErrorDetails";
+import { NoRecords } from "./NoRecords";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
       "& > *": {
         margin: theme.spacing(1),
+        cursor: "pointer"
       },
+      width: theme.spacing(10)
     },
     rightToolbar: {
       float: "right",
     },
+    a: {
+      textDecoration: 'none'
+    },
   })
 );
 
-const scenarioColumns = [
-  {
-    title: "SCENARIO",
-    field: "scenario",
-    type: "string",
-    width: "160px",
-    cellStyle: {
-      color: "#5C5656",
-      textAlign: "left",
-      width: "160px",
-    },
-    headerStyle: { textAlign: "left", color: "#A19F9F" },
-    customSort: (
-      a: { scenario: { value: string | any[] } },
-      b: { scenario: { value: string | any[] } }
-    ) => a.scenario.value.length - b.scenario.value.length,
-    render: (rowData: { [x: string]: { diff: any } }) => (
-      <RenderColumn
-        rowData={rowData}
-        field="scenario"
-        positive={rowData["scenario"].diff}
-      ></RenderColumn>
-    ),
-  },
-  {
-    title: "SCORE",
-    field: "score",
-    type: "string",
-    width: "85px",
-    headerStyle: { textAlign: "left", color: "#A19F9F" },
-    customSort: (
-      a: { score: { value: number } },
-      b: { score: { value: number } }
-    ) => a.score.value - b.score.value,
-    cellStyle: {
-      backgroundColor: "#e1f5f8",
-      color: "#5C5656",
-      fontWeight: "bold",
-      textAlign: "right",
-      borderRight: "2px solid #000",
-      width: "85px",
-    },
-    render: (rowData: { [x: string]: { diff: any } }) => (
-      <RenderColumn
-        rowData={rowData}
-        field="score"
-        positive={rowData["score"].diff}
-      ></RenderColumn>
-    ),
-  },
-];
 
 export const SortableTable: React.FC<EmptyProps> = () => {
   const classes = useStyles();
-  const [result, setResult] = useState({ status: "loading", records: [] });
+  const [result, setResult] = useState<any[]>();
   const [columns, setColumns] = useState<any[]>(scenarioColumns);
-  const [selectedRow, setSelectedRow] = useState<any>();
   const [icons] = useState<any>(tableIcons);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>();
 
   useEffect(() => {
     let baseColumns = columns;
@@ -100,49 +59,50 @@ export const SortableTable: React.FC<EmptyProps> = () => {
     fetch(Config.API_BASE_URL + Config.BASE_METHOD)
       .then((response) => response.json())
       .then((response) => {
-        if (response.statusCode === 401 || response.statusCode === 403) {
-          setResult({ status: "error", records: [] });
-        } else {
-          setResult({ status: "loaded", records: response });
+        try {
+          if (response.statusCode === 401 || response.statusCode === 403) {
+            setError("Un-authorized Error");
+          } else {
+            setResult(response);
+          }
+
+        } catch (error) {
+          setError(error);
+        }
+        finally {
+          setIsLoading(false);
         }
       })
-      .catch((error) => setResult({ status: "error", records: [] }));
+      .catch((error) => { setError(error); setIsLoading(false); });
   }, []);
 
   return (
     <>
-      <div className={classes.root} style={{ width: "100%" }}>
-        <MaterialTable
-          icons={icons}
-          columns={columns}
-          data={result.records}
-          onRowClick={(evt, selectedRow) => setSelectedRow({ selectedRow })}
-          options={{
-            sorting: true,
-            search: false,
-            paging: false,
-            fixedColumns: {
-              left: 2,
-            },
-            toolbar: false,
-            rowStyle: (rowData) => ({
-              backgroundColor:
-                selectedRow &&
-                selectedRow.selectedRow &&
-                selectedRow.selectedRow.tableData.id === rowData.tableData.id
-                  ? "#EEE"
-                  : "#FFF",
-            }),
-          }}
-        />
-        {result && result.records && result.records.length > 0 && (
-          <section className={classes.rightToolbar}>
-            <NavLink to="/scenarioDetails">
-              <OutlinedButtons></OutlinedButtons>
-            </NavLink>
-          </section>
-        )}
-      </div>
-    </>
-  );
+      {isLoading ?
+        (<Spinner></Spinner>)
+        : error && error.length > 0 ?
+          (<ErrorDetails error={error}></ErrorDetails>)
+          : result && (<div className={classes.root}>
+            {result && result.length > 0 ?
+              (<><MaterialTable
+                icons={icons}
+                columns={columns}
+                data={result}
+                options={{
+                  exportButton: true,
+                  sorting: true,
+                  search: false,
+                  paging: false,
+                  fixedColumns: {
+                    left: 2,
+                  },
+                  toolbar: false
+                }}
+              /> <section className={classes.rightToolbar}>
+                  <Link className={classes.a} to="/scenarioDetails">
+                    <OutlinedButtons></OutlinedButtons>
+                  </Link>
+                </section></>)
+              : (<NoRecords></NoRecords>)}
+          </div>)}</>)
 };

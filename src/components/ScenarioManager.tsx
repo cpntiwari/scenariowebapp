@@ -13,12 +13,16 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import React from "react";
 import { SortableTable } from "./common/SortableTable";
 import { EmptyProps } from "../common/types";
+import { Palette } from "../themes/Palette";
+import { ScenarioCardComponent } from "./ScenarioCardComponent";
 
 const theme = createMuiTheme({
   overrides: {
     MuiTableHead: {
       root: {
-        borderTop: "1px solid #f2f2f2",
+        borderTopWidth: "1px",
+        borderTopColor: "#DCDCDC",
+        borderTopStyle: "solid"
       },
     },
     MuiPaper: {
@@ -34,20 +38,21 @@ const theme = createMuiTheme({
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     heading: {
-      fontSize: theme.typography.pxToRem(15),
+      fontSize: theme.typography.pxToRem(20),
       fontWeight: theme.typography.fontWeightBold,
-    },
-    expanded: {
-      margin: "0 auto",
-    },
+      color: Palette.colors.grey["700"],
+    }
   })
 );
-export const ScenarioManager: React.SFC<EmptyProps> = () => {
+interface DataType {
+  data: Array<any>,
+}
+
+export const ScenarioManager = () => {
   const classes = useStyles();
   return (
     <ExpansionPanel
       defaultExpanded={true}
-      classes={{ expanded: classes.expanded }}
     >
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon />}
@@ -58,8 +63,7 @@ export const ScenarioManager: React.SFC<EmptyProps> = () => {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <MuiThemeProvider theme={theme}>
-          {" "}
-          <SortableTable></SortableTable>
+          <ScenarioCardComponent></ScenarioCardComponent>
         </MuiThemeProvider>
       </ExpansionPanelDetails>
     </ExpansionPanel>
